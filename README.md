@@ -66,29 +66,4 @@ lein run
 lein figwheel
 ```
 
-and go to http://localhost:3000 to see the dashboard.  Alternately, you can
-directly add the authorization to the database for (say) Carl and try logging
-in again:
-
-```
-curl -X PATCH \
-  http://localhost:8080/user/carl \
-  -H 'Content-Type: application/json' \
-  -d '{
-  "user_identifier": "",
-  "affiliation": "",
-  "datasets": [
-    {
-      "permissions": [
-        {
-          "affiliation": "example-org",
-          "source_signature": "",
-          "url_prefix": "",
-          "datasets": [
-            "urn:nbn:fi:lb-201403262"
-          ]
-        }
-      ]
-    }
-  ]
-}'
+and go to http://localhost:3000 to see the dashboard.
