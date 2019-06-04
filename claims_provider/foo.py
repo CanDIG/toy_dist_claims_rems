@@ -1,24 +1,50 @@
 import sys
+import os
+import requests
 import jwt
 from flask import Flask, request
 
 app = Flask(import_name=__name__)
 
-is_member = jwt.encode({'profyle_member': True},
+IS_MEMBER = jwt.encode({'profyle_member': True},
                        'secret', algorithm='HS256')
-isnt_member = jwt.encode({'profyle_member': False},
+ISNT_MEMBER = jwt.encode({'profyle_member': False},
                          'secret', algorithm='HS256')
 
-member_list = ['babs0001', 'uppe0001']
+REMS_HOST = os.environ.getenv("REMS_PROXY_HOST", "http://elixir_rems_proxy")
+REMS_KEY = os.environ.getenv("REMS_PROXY_KEY", "secret")
+REMS_PORT = os.environ.getenv("REMS_PROXY_PORT", "8080")
+
+PROFYLE_URN = "urn:nbn:fi:lb-201403262"
+
+def lookup(subject):
+    url = REMS_HOST + ":" + REMS_PORT + "/user/" + subject
+    print("Lookup at "+url, file=sys.stderr)
+    response = requests.get(
+        url,
+        headers={'elixir-api-key': REMS_KEY,
+                 'Accept': 'application/json'}
+    )
+    if not response.status_code == 200:
+        print('Lookup failed', file=sys.stderr)
+        return False
+
+    result = response.json()
+    print('Lookup result '+str(result), file=sys.stderr)
+    for permission in result['permissions']:
+        if PROFYLE_URN in permission['datasets']:
+            return True
+
+    return False
+
 
 @app.route("/claim_source/<subject>")
 def echo(subject):
     for key in request.args:
         print('args[', key, '] = ', request.args[key])
     print('subject: ', subject)
-    print(request.method, file=sys.stderr)
-    print(request.get_json(), file=sys.stderr)
-    token = is_member if subject in member_list else isnt_member
+    member = lookup(subject)
+    token = IS_MEMBER if member else ISNT_MEMBER
     return token, 200, {"Content-Type": "application/jwt"}
 
 
