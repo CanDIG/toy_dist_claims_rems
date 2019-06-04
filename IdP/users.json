@@ -1,63 +1,92 @@
 {
-  "diana": {
-    "sub": "dikr0001",
-    "name": "Diana Krall",
-    "given_name": "Diana",
-    "family_name": "Krall",
-    "nickname": "Dina",
-    "email": "diana@example.org",
+  "alice": {
+    "sub": "alice",
+    "name": "Alice Proffaculty",
+    "given_name": "Alice",
+    "family_name": "Proffaculty",
+    "nickname": "Al",
+    "email": "alice@example.org",
     "email_verified": false,
-    "phone_number": "+46 90 7865000",
+    "phone_number": "+1 416 111 2222",
     "faculty": true,
     "address": {
-      "street_address": "Umeå Universitet",
-      "locality": "Umeå",
-      "postal_code": "SE-90187",
-      "country": "Sweden"
+      "street_address": "University of CanDIG",
+      "locality": "national",
+      "postal_code": "C4N 0I6",
+      "country": "Canada"
     },
     "_claim_names": {
          "profyle_member": "src1"
     },
     "_claim_sources": {
-         "src1": {"endpoint": "http://claims_provider:5000/claim_source/dikr0001"}
+         "src1": {"endpoint": "http://claims_provider:5000/claim_source/alice"}
     }
   },
-  "babs": {
-    "sub": "babs0001",
-    "name": "Barbara J Jensen",
-    "given_name": "Barbara",
-    "family_name": "Jensen",
-    "nickname": "babs",
-    "email": "babs@example.com",
+  "bob": {
+    "sub": "bob",
+    "name": "Robert J Postdoc",
+    "given_name": "Robert",
+    "family_name": "Postdoc",
+    "nickname": "bob",
+    "email": "bob@example.com",
     "email_verified": true,
     "faculty": false,
     "address": {
-      "street_address": "100 Universal City Plaza",
-      "locality": "Hollywood",
-      "region": "CA",
-      "postal_code": "91608",
-      "country": "USA"
+      "street_address": "University of CanDIG",
+      "locality": "national",
+      "postal_code": "C4N 0I6",
+      "country": "Canada"
     },
     "_claim_names": {
          "profyle_member": "src1"
     },
     "_claim_sources": {
-         "src1": {"endpoint": "http://claims_provider:5000/claim_source/babs0001"}
+         "src1": {"endpoint": "http://claims_provider:5000/claim_source/bob"}
     }
   },
-  "upper": {
-    "sub": "uppe0001",
-    "name": "Upper Crust",
-    "given_name": "Upper",
-    "family_name": "CrusT",
-    "email": "uc@example.com",
-    "email_verified": true,
+  "carl": {
+    "sub": "carl",
+    "name": "Carl Faculty",
+    "given_name": "Carl",
+    "family_name": "Faculty",
+    "nickname": "C-rock",
+    "email": "carl@example.org",
+    "email_verified": false,
+    "phone_number": "+1 416 222 3333",
     "faculty": true,
+    "address": {
+      "street_address": "University of CanDIG",
+      "locality": "national",
+      "postal_code": "C4N 0I6",
+      "country": "Canada"
+    },
     "_claim_names": {
          "profyle_member": "src1"
     },
     "_claim_sources": {
-         "src1": {"endpoint": "http://claims_provider:5000/claim_source/uppe0001"}
+         "src1": {"endpoint": "http://claims_provider:5000/claim_source/carl"}
+    }
+  },
+  "bob": {
+    "sub": "frank",
+    "name": "Francis X Labtech",
+    "given_name": "Francis",
+    "family_name": "Labtech",
+    "nickname": "frank",
+    "email": "frank@example.com",
+    "email_verified": true,
+    "faculty": false,
+    "address": {
+      "street_address": "University of CanDIG",
+      "locality": "national",
+      "postal_code": "C4N 0I6",
+      "country": "Canada"
+    },
+    "_claim_names": {
+         "profyle_member": "src1"
+    },
+    "_claim_sources": {
+         "src1": {"endpoint": "http://claims_provider:5000/claim_source/frank"}
     }
   }
 }
