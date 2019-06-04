@@ -1,0 +1,37 @@
+version: '3'
+
+services:
+  idp:
+    build: ./IdP
+    ports:
+     - "443:443"
+
+  rp:
+    build: ./RP
+    ports:
+     - "8000:8000"
+    links:
+     - claims_provider
+     - idp
+
+  claims_provider:
+    build: ./claims_provider
+    ports:
+     - "5000:5000"
+
+  elixir_rems_proxy:
+    build: ./elixir_rems_proxy
+    restart: always
+    ports:
+     - "8080:8080"
+    links:
+     - postgres
+    depends_on:
+     - postgres
+    environment:
+      - DB_HOST=postgresql://postgres:5432
+
+  postgres:
+    build: ./postgres_test_data
+    ports:
+     - "5432:5432"

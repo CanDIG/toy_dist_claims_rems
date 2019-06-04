@@ -1,0 +1,37 @@
+provider:
+    keys:
+        - type: RSA
+          key: keys/key.pem
+          use: [enc, sig]
+        - type: EC
+          crv: P-256
+          use: [sig]
+        - type: EC
+          crv: P-256
+          use: [enc]
+
+authn:
+    - acr: password
+      class: provider.authn.user_pass.UserPass
+      kwargs:
+          db:
+              class: provider.authn.util.JSONDictDB
+              kwargs:
+                json_path: passwd.json
+          template: user_pass.jinja2
+          page_header: "Testing log in"
+          submit_btn: "Login!"
+          user_label: "User Name"
+          passwd_label: "Password"
+
+userinfo:
+    class: provider.authn.util.JSONDictDB
+    kwargs:
+        json_path: users.json
+
+server:
+    cert: certs/localhost.crt
+    key: certs/localhost.key
+    cert_chain:
+    template_dirs:
+        - src/provider/authn/templates
