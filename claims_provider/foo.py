@@ -11,9 +11,9 @@ IS_MEMBER = jwt.encode({'profyle_member': True},
 ISNT_MEMBER = jwt.encode({'profyle_member': False},
                          'secret', algorithm='HS256')
 
-REMS_HOST = os.environ.getenv("REMS_PROXY_HOST", "http://elixir_rems_proxy")
-REMS_KEY = os.environ.getenv("REMS_PROXY_KEY", "secret")
-REMS_PORT = os.environ.getenv("REMS_PROXY_PORT", "8080")
+REMS_HOST = os.getenv("REMS_PROXY_HOST", "http://elixir_rems_proxy")
+REMS_KEY = os.getenv("REMS_PROXY_KEY", "secret")
+REMS_PORT = os.getenv("REMS_PROXY_PORT", "8080")
 
 PROFYLE_URN = "urn:nbn:fi:lb-201403262"
 
