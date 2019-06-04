@@ -18,18 +18,21 @@ services:
     build: ./claims_provider
     ports:
      - "5000:5000"
+    links:
+     - elixir_rems_proxy
 
   elixir_rems_proxy:
     build: ./elixir_rems_proxy
+    depends_on:
+     - postgres
     restart: always
     ports:
      - "8080:8080"
     links:
      - postgres
-    depends_on:
-     - postgres
     environment:
       - DB_HOST=postgresql://postgres:5432
+      - PUBLIC_KEY=secret
 
   postgres:
     build: ./postgres_test_data
