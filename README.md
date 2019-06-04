@@ -1,10 +1,14 @@
 # Simple distributed claims example
 
-A simple distributed claims example using pyoidc.  These are lightly modified versions of the simple_op/simple_rp example that comes with pyoidc.
+A simple distributed claims example using pyoidc.  These are lightly
+modified versions of the simple_op/simple_rp example that comes
+with pyoidc.
 
-The use demonstrated here is the same as in [toy_dist_claims](https://github.com/ljdursi/toy_dist_claims), but using
-the production [Elixir REMS](http://www.elixir-finland.org/en/aai-rems-2/) authorization management package.  So the
-outline is the same as in that package:
+The use demonstrated here is the same as in
+[toy_dist_claims](https://github.com/ljdursi/toy_dist_claims), but
+using the production [Elixir REMS](http://www.elixir-finland.org/en/aai-rems-2/)
+authorization management package.  So the outline is the same as
+in that package:
 
 ![Interacting services](imgs/diagram.png)
 
@@ -62,4 +66,29 @@ lein run
 lein figwheel
 ```
 
-and go to http://localhost:3000 to see the dashboard.
+and go to http://localhost:3000 to see the dashboard.  Alternately, you can
+directly add the authorization to the database for (say) Carl and try logging
+in again:
+
+```
+curl -X PATCH \
+  http://localhost:8080/user/carl \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "user_identifier": "",
+  "affiliation": "",
+  "datasets": [
+    {
+      "permissions": [
+        {
+          "affiliation": "example-org",
+          "source_signature": "",
+          "url_prefix": "",
+          "datasets": [
+            "urn:nbn:fi:lb-201403262"
+          ]
+        }
+      ]
+    }
+  ]
+}'
